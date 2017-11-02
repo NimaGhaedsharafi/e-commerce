@@ -9,7 +9,7 @@
 namespace AppBundle\Controller;
 
 
-use App\Contracts\Renderable;
+use AppBundle\Contracts\Renderable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
