@@ -6,7 +6,7 @@
  * Time: 12:11
  */
 
-namespace App\Contracts;
+namespace AppBundle\Contracts;
 
 
 /**

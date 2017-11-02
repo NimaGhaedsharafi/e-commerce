@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts;
+namespace AppBundle\Contracts;
 
 /**
  * Created by PhpStorm.
