@@ -22,18 +22,20 @@ class BaseController extends Controller
     /**
      * Renders a view.
      *
-     * @param string|Renderable   $view       The view name
-     * @param array    $parameters An array of parameters to pass to the view
-     * @param Response $response   A response instance
+     * @param Renderable|string $data
+     * @param int $status
+     * @param array $headers
      *
      * @return Response A Response instance
      */
-    protected function render($view, array $parameters = [], Response $response = null)
+    protected function response($data, $status = 200, $headers = [])
     {
-        if ($view instanceof Renderable) {
-            $view = $view->render();
+        if ($data instanceof Renderable) {
+            $data = $data->render();
         }
 
-        return parent::render($view, $parameters, $response);
+        $headers = array_merge(['content-type' => 'application/json'], $headers);
+
+        return new Response($data, $status, $headers);
     }
 }
