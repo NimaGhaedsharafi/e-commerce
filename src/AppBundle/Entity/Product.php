@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Product
  *
- * @ORM\Table(name="products")
+ * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
 class Product
@@ -18,24 +18,36 @@ class Product
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string")
-     * @ORM\Index
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string")
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
 
     /**
@@ -94,6 +106,54 @@ class Product
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Product
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Product
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
 
