@@ -1,3 +1,4 @@
 vendor
 parameters.yml
 var
+bootstrap.php.cache
