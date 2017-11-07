@@ -9,6 +9,8 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Contracts\Arrayable;
+use AppBundle\Contracts\Collection;
 use AppBundle\Contracts\Renderable;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +32,12 @@ class BaseController extends Controller
      */
     protected function response($data, $status = 200, $headers = [])
     {
-        if ($data instanceof Renderable) {
+        if (is_array($data) && $data[0] instanceof Renderable) {
+
+            $data = json_encode(array_map(function ($value) {
+                return $value instanceof Arrayable ? $value->toArray() : $value;
+            }, $data));
+        } elseif ($data instanceof Renderable) {
             $data = $data->render();
         }
 

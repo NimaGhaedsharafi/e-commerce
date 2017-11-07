@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
-class Product
+class Product extends BaseEntity
 {
     /**
      * @var int
@@ -49,6 +50,14 @@ class Product
      */
     private $updatedAt;
 
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(Carbon::now());
+        $this->setUpdatedAt(Carbon::now());
+    }
 
     /**
      * Get id
@@ -155,5 +164,15 @@ class Product
     {
         return $this->updatedAt;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription()
+        ];
+    }
+
+
 }
 

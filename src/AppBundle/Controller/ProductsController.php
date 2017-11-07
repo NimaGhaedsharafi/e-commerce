@@ -18,6 +18,7 @@ class ProductsController extends BaseController
      */
     public function indexAction()
     {
-        return $this->json($this->getDoctrine()->getRepository(Product::class)->findAll());
+        return $this->response($this->getDoctrine()->getRepository(Product::class)->findAll());
+    }
     }
 }
