@@ -28,4 +28,20 @@ class ProductControllerTest extends ApiTest
             ]
         ], $this->getDecodedResponse($client));
     }
+
+    /**
+     * @test
+     */
+    public function create_product_should_return_the_product()
+    {
+        $client = $this->createClient();
+        $client->request('POST', 'products/create', ['title' => 'random-name', 'description' => 'some-random-desc']);
+
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+
+        $this->seeJsonStructure([
+            'title',
+            'description',
+        ], $this->getDecodedResponse($client));
+    }
 }
