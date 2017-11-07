@@ -3,4 +3,9 @@ products:
     defaults:
         _format: json,
         _controller: AppBundle:Products:index
-        
+
+create_product:
+    path: products/create
+    defaults:
+        _format: json,
+        _controller: AppBundle:Products:create

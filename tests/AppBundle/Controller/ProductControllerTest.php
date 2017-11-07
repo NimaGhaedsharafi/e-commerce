@@ -9,6 +9,7 @@
 namespace Tests\AppBundle\Controller;
 
 
+use AppBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductControllerTest extends ApiTest
@@ -18,17 +19,16 @@ class ProductControllerTest extends ApiTest
      */
     public function index_should_return_all_of_the_products()
     {
-        $client = $this->createClient();
-        $client->request('GET', 'products');
+        $this->client->request('GET', 'products');
 
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->seeJsonStructure([
             '*' => [
                 'title',
                 'description',
             ]
-        ], $this->getDecodedResponse($client));
+        ], $this->getDecodedResponse($this->client));
     }
 
     /**
@@ -36,14 +36,16 @@ class ProductControllerTest extends ApiTest
      */
     public function create_product_should_return_the_product()
     {
-        $client = $this->createClient();
-        $client->request('POST', 'products/create', ['title' => 'random-name', 'description' => 'some-random-desc']);
+        $count = $this->doctrine->getRepository(Product::class)->count();
 
-        $this->assertEquals(Response::HTTP_CREATED, $client->getResponse()->getStatusCode());
+        $this->client->request('POST', 'products/create', ['title' => 'random-name', 'description' => 'some-random-desc']);
 
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
         $this->seeJsonStructure([
             'title',
             'description',
-        ], $this->getDecodedResponse($client));
+        ], $this->getDecodedResponse($this->client));
+
+        $this->assertEquals($count + 1, $this->doctrine->getRepository(Product::class)->count());
     }
 }
