@@ -1,0 +1,6 @@
+products:
+    path: products
+    defaults:
+        _format: json,
+        _controller: AppBundle:Products:index
+        
