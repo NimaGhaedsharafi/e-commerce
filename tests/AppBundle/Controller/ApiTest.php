@@ -10,10 +10,37 @@ namespace Tests\AppBundle\Controller;
 
 
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Client;
 
 abstract class ApiTest extends WebTestCase
 {
+    /** @var ContainerBuilder */
+    protected $container;
+    /** @var ManagerRegistry */
+    protected $doctrine;
+    /** @var Client */
+    protected $client;
+    /** @var EntityManager */
+    protected $em;
+
+    public function setUp()
+    {
+        self::bootKernel();
+
+        $this->container = self::$kernel->getContainer();
+        $this->doctrine = $this->container->get('doctrine');
+        $this->client = $this->createClient(['environment' => 'test']);
+        $this->em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+    }
+
+    /**
+     * @param Client $client
+     * @return mixed
+     */
     public function getDecodedResponse($client)
     {
         return json_decode($client->getResponse()->getContent(), true);
