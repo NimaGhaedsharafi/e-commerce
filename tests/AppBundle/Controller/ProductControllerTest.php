@@ -9,6 +9,8 @@
 namespace Tests\AppBundle\Controller;
 
 
+use Symfony\Component\HttpFoundation\Response;
+
 class ProductControllerTest extends ApiTest
 {
     /**
@@ -19,7 +21,7 @@ class ProductControllerTest extends ApiTest
         $client = $this->createClient();
         $client->request('GET', 'products');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
 
         $this->seeJsonStructure([
             '*' => [
@@ -37,7 +39,7 @@ class ProductControllerTest extends ApiTest
         $client = $this->createClient();
         $client->request('POST', 'products/create', ['title' => 'random-name', 'description' => 'some-random-desc']);
 
-        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $client->getResponse()->getStatusCode());
 
         $this->seeJsonStructure([
             'title',
