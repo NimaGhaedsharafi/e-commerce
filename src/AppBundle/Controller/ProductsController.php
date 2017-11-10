@@ -71,6 +71,10 @@ class ProductsController extends BaseController
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(['id' => $id]);
 
+        if ($product === null) {
+            throw new NotFoundEntity();
+        }
+        
         return $this->response($product);
     }
 }

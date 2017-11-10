@@ -107,4 +107,13 @@ class ProductControllerTest extends ApiTest
         $this->assertEquals($data['title'], $title);
         $this->assertEquals($data['description'], $description);
     }
+
+    /**
+     * @test
+     */
+    public function get_a_product_by_an_invalid_id_should_throw_exception()
+    {
+        $this->client->request('GET', 'products/show/' . 0);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+    }
 }
