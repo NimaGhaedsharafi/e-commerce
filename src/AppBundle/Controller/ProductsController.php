@@ -50,8 +50,8 @@ class ProductsController extends BaseController
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @param Request $request
+     * @return Response
      */
     public function deleteAction(Request $request)
     {
@@ -67,6 +67,10 @@ class ProductsController extends BaseController
         return $this->ack();
     }
 
+    /**
+     * @param $id
+     * @return Response
+     */
     public function showAction($id)
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(['id' => $id]);
@@ -74,7 +78,7 @@ class ProductsController extends BaseController
         if ($product === null) {
             throw new NotFoundEntity();
         }
-        
+
         return $this->response($product);
     }
 }
