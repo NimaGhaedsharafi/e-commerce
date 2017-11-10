@@ -57,6 +57,9 @@ class ProductsController extends BaseController
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(['id' => $request->get('id', 0)]);
 
+        if ($product === null) {
+            throw new NotFoundEntity();
+        }
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($product);
         $manager->flush();

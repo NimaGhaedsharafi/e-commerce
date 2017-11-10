@@ -71,4 +71,17 @@ class ProductControllerTest extends ApiTest
 
         $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
     }
+
+    /**
+     * @test
+     */
+    public function delete_an_invalid_product_should_throw_exception()
+    {
+        $count = $this->doctrine->getRepository(Product::class)->count();
+
+        $this->client->request('DELETE', 'products/delete', ['id' => -1]);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+
+        $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
+    }
 }
