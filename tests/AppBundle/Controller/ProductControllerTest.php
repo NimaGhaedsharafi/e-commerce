@@ -116,4 +116,42 @@ class ProductControllerTest extends ApiTest
         $this->client->request('GET', 'products/show/' . 0);
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
+
+    /**
+     * @test
+     */
+    public function edit_a_product_should_work_fine()
+    {
+        $title = 'random-name';
+        $description = 'some-random-desc';
+        // there's no factory for entity so let's send a request to create a product
+        $this->client->request('POST', 'products/create', compact('title', 'description'));
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+        $count = $this->doctrine->getRepository(Product::class)->count();
+
+        /** @var Product $product */
+        $product = $this->doctrine->getRepository(Product::class)->findOneBy([]);
+
+        $newTitle = 'a-new-title';
+        $newDescription = 'a-new-description';
+        $data = [
+            'title' => $newTitle,
+            'description' => $newDescription
+        ];
+
+        $this->resetClient();
+        $this->client->request('POST', 'products/edit/' . $product->getId(), $data);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+
+        $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
+
+        $this->resetClient();
+        $this->client->request('GET', 'products/show/' . $product->getId());
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $data = $this->getDecodedResponse();
+        $this->assertEquals($data['title'], $newTitle);
+        $this->assertEquals($data['description'], $newDescription);
+    }
+    
 }

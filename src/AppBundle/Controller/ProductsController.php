@@ -81,4 +81,16 @@ class ProductsController extends BaseController
 
         return $this->response($product);
     }
+
+    public function updateAction($id, Request $request)
+    {
+        /** @var Product $product */
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        
+        $product->setTitle($request->get('title'));
+        $product->setDescription($request->get('description'));
+        $this->getDoctrine()->getManager()->flush();
+        
+        return $this->response($product);
+    }
 }
