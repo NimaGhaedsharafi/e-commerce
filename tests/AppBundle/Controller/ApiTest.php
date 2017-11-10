@@ -41,8 +41,11 @@ abstract class ApiTest extends WebTestCase
      * @param Client $client
      * @return mixed
      */
-    public function getDecodedResponse($client)
+    public function getDecodedResponse($client = null)
     {
+        if ($client === null) {
+            $client = $this->client;
+        }
         return json_decode($client->getResponse()->getContent(), true);
     }
     /**

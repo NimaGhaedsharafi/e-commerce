@@ -103,9 +103,8 @@ class ProductControllerTest extends ApiTest
         $this->client->request('GET', 'products/show/' . $product->getId());
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
-        $data = json_decode($this->client->getResponse()->getContent());
-        $this->assertEquals($data->title, $title);
-        $this->assertEquals($data->description, $description);
-
+        $data = $this->getDecodedResponse();
+        $this->assertEquals($data['title'], $title);
+        $this->assertEquals($data['description'], $description);
     }
 }
