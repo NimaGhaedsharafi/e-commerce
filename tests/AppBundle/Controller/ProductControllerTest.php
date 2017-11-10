@@ -154,4 +154,19 @@ class ProductControllerTest extends ApiTest
         $this->assertEquals($data['description'], $newDescription);
     }
     
+    /**
+     * @test
+     */
+    public function edit_an_non_existing_product_should_throw_exception()
+    {
+        $newTitle = 'a-new-title';
+        $newDescription = 'a-new-description';
+        $data = [
+            'title' => $newTitle,
+            'description' => $newDescription
+        ];
+
+        $this->client->request('POST', 'products/edit/' . 0, $data);
+        $this->assertTrue($this->client->getResponse()->isNotFound());
+    }
 }

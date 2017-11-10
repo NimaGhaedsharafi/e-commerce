@@ -86,7 +86,11 @@ class ProductsController extends BaseController
     {
         /** @var Product $product */
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
-        
+
+        if ($product === null) {
+            throw new NotFoundEntity();
+        }
+
         $product->setTitle($request->get('title'));
         $product->setDescription($request->get('description'));
         $this->getDoctrine()->getManager()->flush();
