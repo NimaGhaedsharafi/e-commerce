@@ -90,15 +90,11 @@ class ProductControllerTest extends ApiTest
      */
     public function get_a_product_by_its_id_should_return_the_product()
     {
-        $count = $this->doctrine->getRepository(Product::class)->count();
-
         $title = 'random-name';
         $description = 'some-random-desc';
         // there's no factory for entity so let's send a request to create a product
         $this->client->request('POST', 'products/create', compact('title', 'description'));
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-
-        $this->assertEquals($count + 1, $this->doctrine->getRepository(Product::class)->count());
 
         /** @var Product $product */
         $product = $this->doctrine->getRepository(Product::class)->findOneBy([]);
