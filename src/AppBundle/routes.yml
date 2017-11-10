@@ -9,3 +9,9 @@ create_product:
     defaults:
         _format: json,
         _controller: AppBundle:Products:create
+
+delete_product:
+    path: products/delete
+    defaults:
+        _format: json,
+        _controller: AppBundle:Products:delete

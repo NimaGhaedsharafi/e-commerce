@@ -48,4 +48,26 @@ class ProductControllerTest extends ApiTest
 
         $this->assertEquals($count + 1, $this->doctrine->getRepository(Product::class)->count());
     }
+
+    /**
+     * @test
+     */
+    public function delete_a_valid_product_should_work()
+    {
+        $count = $this->doctrine->getRepository(Product::class)->count();
+
+        // there's no factory for entity so let's send a request to create a product
+        $this->client->request('POST', 'products/create', ['title' => 'random-name', 'description' => 'some-random-desc']);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $this->assertEquals($count + 1, $this->doctrine->getRepository(Product::class)->count());
+
+        /** @var Product $product */
+        $product = $this->doctrine->getRepository(Product::class)->findOneBy([]);
+
+        $this->client = $this->createClient();
+        $this->client->request('DELETE', 'products/delete', ['id' => $product->getId()]);
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $this->client->getResponse()->getStatusCode());
+
+    }
 }

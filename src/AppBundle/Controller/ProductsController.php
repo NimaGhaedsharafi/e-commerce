@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Product;
+use AppBundle\Exception\NotFoundEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,5 +47,20 @@ class ProductsController extends BaseController
         $manager->flush();
 
         return $this->response($product, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteAction(Request $request)
+    {
+        $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(['id' => $request->get('id', 0)]);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($product);
+        $manager->flush();
+        
+        return $this->ack();
     }
 }
