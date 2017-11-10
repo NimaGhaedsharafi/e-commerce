@@ -69,4 +69,9 @@ abstract class ApiTest extends WebTestCase
         }
         return $this;
     }
+
+    public function resetClient()
+    {
+        $this->client = $this->createClient();
+    }
 }

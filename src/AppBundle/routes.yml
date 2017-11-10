@@ -15,3 +15,11 @@ delete_product:
     defaults:
         _format: json,
         _controller: AppBundle:Products:delete
+
+show_product:
+    path: products/show/{id}
+    defaults:
+        _format: json,
+        _controller: AppBundle:Products:show
+    requirements:
+        id: '\d+'

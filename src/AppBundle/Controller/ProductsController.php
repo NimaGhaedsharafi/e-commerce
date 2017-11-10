@@ -66,4 +66,11 @@ class ProductsController extends BaseController
         
         return $this->ack();
     }
+
+    public function showAction($id)
+    {
+        $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(['id' => $id]);
+
+        return $this->response($product);
+    }
 }
