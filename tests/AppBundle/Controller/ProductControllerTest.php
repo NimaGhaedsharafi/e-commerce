@@ -69,5 +69,6 @@ class ProductControllerTest extends ApiTest
         $this->client->request('DELETE', 'products/delete', ['id' => $product->getId()]);
         $this->assertEquals(Response::HTTP_NO_CONTENT, $this->client->getResponse()->getStatusCode());
 
+        $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
     }
 }
