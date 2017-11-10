@@ -21,7 +21,7 @@ class ProductControllerTest extends ApiTest
     {
         $this->client->request('GET', 'products');
 
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isOk());
 
         $this->seeJsonStructure([
             '*' => [
@@ -80,7 +80,7 @@ class ProductControllerTest extends ApiTest
         $count = $this->doctrine->getRepository(Product::class)->count();
 
         $this->client->request('DELETE', 'products/delete', ['id' => -1]);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isNotFound());
 
         $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
     }
@@ -101,7 +101,7 @@ class ProductControllerTest extends ApiTest
 
         $this->resetClient();
         $this->client->request('GET', 'products/show/' . $product->getId());
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isOk());
 
         $data = $this->getDecodedResponse();
         $this->assertEquals($data['title'], $title);
@@ -114,7 +114,7 @@ class ProductControllerTest extends ApiTest
     public function get_a_product_by_an_invalid_id_should_throw_exception()
     {
         $this->client->request('GET', 'products/show/' . 0);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isNotFound());
     }
 
     /**
@@ -153,7 +153,7 @@ class ProductControllerTest extends ApiTest
         $this->assertEquals($data['title'], $newTitle);
         $this->assertEquals($data['description'], $newDescription);
     }
-    
+
     /**
      * @test
      */
