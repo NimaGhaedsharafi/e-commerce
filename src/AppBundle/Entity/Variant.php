@@ -24,10 +24,10 @@ class Variant extends BaseEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="product_id", type="integer")
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="variant")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="variants")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $productId;
+    private $product;
 
     /**
      * @var int
@@ -80,27 +80,19 @@ class Variant extends BaseEntity
     }
 
     /**
-     * Set productId
-     *
-     * @param integer $productId
-     *
-     * @return Variant
+     * @return Product
      */
-    public function setProductId($productId)
+    public function getProduct()
     {
-        $this->productId = $productId;
-
-        return $this;
+        return $this->product;
     }
 
     /**
-     * Get productId
-     *
-     * @return int
+     * @param Product $product
      */
-    public function getProductId()
+    public function setProduct($product)
     {
-        return $this->productId;
+        $this->product = $product;
     }
 
     /**
@@ -126,4 +118,14 @@ class Variant extends BaseEntity
     {
         return $this->price;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'price' => $this->getPrice(),
+            'color' => $this->getColor()
+        ];
+    }
+
 }

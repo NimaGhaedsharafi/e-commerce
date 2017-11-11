@@ -31,3 +31,12 @@ update_product:
         _controller: AppBundle:Products:update
     requirements:
         id: '\d+'
+
+add.varaint.product:
+    path: products/{id}/variant/add
+    defaults:
+        _format: json,
+        _controller: AppBundle:Variant:add
+    requirements:
+        id: '\d+'
+
