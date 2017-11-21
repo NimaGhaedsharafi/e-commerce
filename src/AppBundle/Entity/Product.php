@@ -53,7 +53,7 @@ class Product extends BaseEntity
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", fetch="LAZY")
+     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", fetch="EAGER")
      */
     private $variants;
 
