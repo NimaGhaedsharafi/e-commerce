@@ -11,6 +11,7 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Variant;
+use AppBundle\Enums\Color;
 use Symfony\Component\HttpFoundation\Response;
 
 class VariantControllerTest extends ApiTest
@@ -40,7 +41,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -67,7 +68,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -110,7 +111,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -140,7 +141,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -150,7 +151,7 @@ class VariantControllerTest extends ApiTest
         $variant = $this->getDecodedResponse()['variants'][0];
 
         $newPrice = 9999;
-        $newColor = 1;
+        $newColor = Color::Black;
         $data = ['price' => $newPrice, 'color' => $newColor];
         $url = 'products/%d/variant/%d/update';
         $url = vsprintf($url, [$product->getId(), $variant['id']]);
@@ -175,7 +176,7 @@ class VariantControllerTest extends ApiTest
         $url = 'products/%d/variant/%d/update';
         $url = vsprintf($url, [$product->getId(), 0]);
         $newPrice = 9999;
-        $newColor = 1;
+        $newColor = Color::Black;
 
         $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
         $this->assertTrue($this->client->getResponse()->isNotFound());
@@ -189,7 +190,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -204,7 +205,7 @@ class VariantControllerTest extends ApiTest
         $url = 'products/%d/variant/%d/update';
         $url = vsprintf($url, [$product->getId(), $variant['id']]);
         $newPrice = 9999;
-        $newColor = 1;
+        $newColor = Color::Black;
 
         $this->resetClient();
         $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
@@ -220,7 +221,7 @@ class VariantControllerTest extends ApiTest
         /** @var Product $product */
         $product = $this->createProduct();
 
-        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $data = ['color' => Color::White, 'price' => rand(1, 9) * 1000];
         $url = 'products/%d/variant/add';
         $url = vsprintf($url, [$product->getId()]);
 
@@ -232,7 +233,7 @@ class VariantControllerTest extends ApiTest
         $url = 'products/%d/variant/%d/update';
         $url = vsprintf($url, [$product->getId(), $variant['id']]);
         $newPrice = 9999;
-        $newColor = 1;
+        $newColor = Color::Black;
 
         $this->resetClient();
         $this->client->request('POST', $url, []);
