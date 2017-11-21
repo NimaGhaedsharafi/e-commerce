@@ -46,6 +46,13 @@ class Variant extends BaseEntity
 
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="product_id", type="integer")
+     */
+    private $product_id;
+
+    /**
      * Get id
      *
      * @return int
@@ -117,6 +124,22 @@ class Variant extends BaseEntity
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductId(): int
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * @param int $product_id
+     */
+    public function setProductId(int $product_id)
+    {
+        $this->product_id = $product_id;
     }
 
     /**
