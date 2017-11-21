@@ -163,4 +163,21 @@ class VariantControllerTest extends ApiTest
         $this->assertEquals($data['price'], $newPrice);
         $this->assertEquals($data['color'], $newColor);
     }
+
+    /**
+     * @test
+     */
+    public function update_a_non_exists_variant_from_a_product_should_throw_exception()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $url = 'products/%d/variant/%d/update';
+        $url = vsprintf($url, [$product->getId(), 0]);
+        $newPrice = 9999;
+        $newColor = 1;
+
+        $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
+        $this->assertTrue($this->client->getResponse()->isNotFound());
+    }
 }

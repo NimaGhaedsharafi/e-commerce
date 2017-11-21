@@ -66,6 +66,9 @@ class VariantController extends BaseController
         /** @var Variant $variant */
         $variant = $this->getDoctrine()->getRepository(Variant::class)->find($vid);
 
+        if ($variant === null) {
+            throw new NotFoundEntity();
+        }
         $variant->setColor($request->get('color'));
         $variant->setPrice($request->get('price'));
         $this->getDoctrine()->getManager()->flush();
