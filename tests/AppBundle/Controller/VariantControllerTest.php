@@ -235,7 +235,16 @@ class VariantControllerTest extends ApiTest
         $newColor = 1;
 
         $this->resetClient();
+        $this->client->request('POST', $url, []);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->resetClient();
         $this->client->request('POST', $url, ['color' => $newColor]);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->resetClient();
+        $this->client->request('POST', $url, ['price' => $newColor]);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
     }
 }
