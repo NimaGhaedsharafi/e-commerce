@@ -9,6 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VariantController extends BaseController
 {
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Response
+     */
     public function addAction($id, Request $request)
     {
         /** @var Product $product */
