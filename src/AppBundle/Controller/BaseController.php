@@ -32,9 +32,9 @@ class BaseController extends Controller
      */
     protected function response($data = null, $status = 200, $headers = [])
     {
-        if (is_array($data) && isset($data[0]) && $data[0] instanceof Renderable) {
+        if (is_array($data) && count($data) > 1) {
             $data = json_encode(array_map(function ($value) {
-                return $value instanceof Arrayable ? $value->toArray() : $value;
+                return $value instanceof Collection ? $value->toArray() : $value;
             }, $data));
         } elseif ($data instanceof Renderable) {
             $data = $data->render();
