@@ -24,11 +24,12 @@ class VariantControllerTest extends ApiTest
         $description = 'some-great-description';
 
         // there's no factory for entity so let's send a request to create a product
+        $this->resetClient();
         $this->client->request('POST', 'products/create', compact('title', 'description'));
         $this->assertTrue($this->client->getResponse()->isSuccessful());
         $this->resetClient();
 
-        return $this->em->getRepository(Product::class)->findOneBy([]);
+        return $this->em->getRepository(Product::class)->findOneBy([], ['id' => 'desc']);
     }
 
     /**
