@@ -85,6 +85,7 @@ class VariantControllerTest extends ApiTest
 
         $this->assertCount(0, $this->doctrine->getRepository(Variant::class)->findBy($data));
     }
+
     /**
      * @test
      */
@@ -129,5 +130,38 @@ class VariantControllerTest extends ApiTest
         $this->assertTrue($this->client->getResponse()->isNotFound());
 
         $this->assertCount(1, $this->doctrine->getRepository(Variant::class)->findBy($data));
+    }
+
+    /**
+     * @test
+     * @group a
+     */
+    public function edit_a_variant_from_a_product_should_work_fine()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $url = 'products/%d/variant/add';
+        $url = vsprintf($url, [$product->getId()]);
+
+        $this->client->request('POST', $url, $data);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $variant = $this->getDecodedResponse()['variants'][0];
+
+        $newPrice = 9999;
+        $newColor = 1;
+        $data = ['price' => $newPrice, 'color' => $newColor];
+        $url = 'products/%d/variant/%d/update';
+        $url = vsprintf($url, [$product->getId(), $variant['id']]);
+
+        $this->resetClient();
+        $this->client->request('POST', $url, $data);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $data = $this->getDecodedResponse();
+        $this->assertEquals($data['price'], $newPrice);
+        $this->assertEquals($data['color'], $newColor);
     }
 }

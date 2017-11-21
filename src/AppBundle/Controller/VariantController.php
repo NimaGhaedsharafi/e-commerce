@@ -54,4 +54,22 @@ class VariantController extends BaseController
 
         return $this->ack();
     }
+
+    /**
+     * @param $pid
+     * @param $vid
+     * @param Request $request
+     * @return Response
+     */
+    public function updateAction($pid, $vid, Request $request)
+    {
+        /** @var Variant $variant */
+        $variant = $this->getDoctrine()->getRepository(Variant::class)->find($vid);
+
+        $variant->setColor($request->get('color'));
+        $variant->setPrice($request->get('price'));
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->response($variant);
+    }
 }

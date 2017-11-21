@@ -49,3 +49,21 @@ delete.varaint.product:
         pid: \d+
         vid: \d+
 
+delete.varaint.product:
+    path: products/{pid}/variant/{vid}/delete
+    defaults:
+        _format: json
+        _controller: AppBundle:Variant:delete
+    requirements:
+        pid: \d+
+        vid: \d+
+
+update.varaint.product:
+    path: products/{pid}/variant/{vid}/update
+    defaults:
+        _format: json
+        _controller: AppBundle:Variant:update
+    requirements:
+        pid: \d+
+        vid: \d+
+
