@@ -191,12 +191,15 @@ class Product extends BaseEntity
         $this->variants = $variants;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
-            'variants' => $this->getVariants()
+            'variants' => $this->getVariants()->toArray()
         ];
     }
 }
