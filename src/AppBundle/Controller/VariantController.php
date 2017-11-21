@@ -66,7 +66,7 @@ class VariantController extends BaseController
         /** @var Variant $variant */
         $variant = $this->getDoctrine()->getRepository(Variant::class)->find($vid);
 
-        if ($variant === null) {
+        if ($variant === null || $variant->getProductId() != $pid) {
             throw new NotFoundEntity();
         }
         $variant->setColor($request->get('color'));

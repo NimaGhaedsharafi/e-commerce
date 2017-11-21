@@ -180,4 +180,36 @@ class VariantControllerTest extends ApiTest
         $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
         $this->assertTrue($this->client->getResponse()->isNotFound());
     }
+
+    /**
+     * @test
+     * @group a
+     */
+    public function update_variant_from_another_product_should_throw_exception()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $url = 'products/%d/variant/add';
+        $url = vsprintf($url, [$product->getId()]);
+
+        $this->client->request('POST', $url, $data);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $variant = $this->getDecodedResponse()['variants'][0];
+
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $url = 'products/%d/variant/%d/update';
+        $url = vsprintf($url, [$product->getId(), $variant['id']]);
+        $newPrice = 9999;
+        $newColor = 1;
+
+
+        $this->resetClient();
+        $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
+        $this->assertTrue($this->client->getResponse()->isNotFound());
+    }
 }
