@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Variant;
 use AppBundle\Exception\NotFoundEntity;
+use AppBundle\Exception\ValidationFailed;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -63,6 +64,13 @@ class VariantController extends BaseController
      */
     public function updateAction($pid, $vid, Request $request)
     {
+        // TODO: add a validation
+        // it needs some validation but I don't know how to do it in right way!
+        // but just for now let's check their existence
+         if ($request->get('price') === null || $request->get('color') === null) {
+             throw new ValidationFailed();
+         }
+
         /** @var Variant $variant */
         $variant = $this->getDoctrine()->getRepository(Variant::class)->find($vid);
 
