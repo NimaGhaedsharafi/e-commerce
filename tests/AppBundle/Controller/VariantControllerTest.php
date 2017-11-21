@@ -58,4 +58,79 @@ class VariantControllerTest extends ApiTest
 
         $this->assertCount(1, $this->getDecodedResponse()['variants']);
     }
+
+    /**
+     * @test
+     * @group a
+     */
+    public function delete_a_variant_from_a_product_should_work_fine()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $url = 'products/%d/variant/add';
+        $url = vsprintf($url, [$product->getId()]);
+
+        $this->client->request('POST', $url, $data);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $variant = $this->getDecodedResponse()['variants'][0];
+
+        $url = 'products/%d/variant/%d/delete';
+        $url = vsprintf($url, [$product->getId(), $variant['id']]);
+
+        $this->resetClient();
+        $this->client->request('POST', $url);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $this->assertCount(0, $this->doctrine->getRepository(Variant::class)->findBy($data));
+    }
+    /**
+     * @test
+     * @group a
+     */
+    public function delete_a_non_exists_variant_from_a_product_should_throw_exception()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $url = 'products/%d/variant/%d/delete';
+        $url = vsprintf($url, [$product->getId(), 0]);
+
+        $this->resetClient();
+        $this->client->request('POST', $url);
+        $this->assertTrue($this->client->getResponse()->isNotFound());
+    }
+
+    /**
+     * @test
+     * @group b
+     */
+    public function delete_variant_from_another_product_should_throw_exception()
+    {
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $data = ['color' => 0, 'price' => rand(1, 9) * 1000];
+        $url = 'products/%d/variant/add';
+        $url = vsprintf($url, [$product->getId()]);
+
+        $this->client->request('POST', $url, $data);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
+
+        $variant = $this->getDecodedResponse()['variants'][0];
+
+        /** @var Product $product */
+        $product = $this->createProduct();
+
+        $url = 'products/%d/variant/%d/delete';
+        $url = vsprintf($url, [$product->getId(), $variant['id']]);
+
+        $this->resetClient();
+        $this->client->request('POST', $url);
+        $this->assertTrue($this->client->getResponse()->isNotFound());
+
+        $this->assertCount(1, $this->doctrine->getRepository(Variant::class)->findBy($data));
+    }
 }

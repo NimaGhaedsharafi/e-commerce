@@ -40,3 +40,12 @@ add.varaint.product:
     requirements:
         id: \d+
 
+delete.varaint.product:
+    path: products/{pid}/variant/{vid}/delete
+    defaults:
+        _format: json
+        _controller: AppBundle:Variant:delete
+    requirements:
+        pid: \d+
+        vid: \d+
+
