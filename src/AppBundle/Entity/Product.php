@@ -65,6 +65,8 @@ class Product extends BaseEntity
     {
         $this->setCreatedAt(Carbon::now());
         $this->setUpdatedAt(Carbon::now());
+
+        $this->variants = new ArrayCollection();
     }
 
     /**
