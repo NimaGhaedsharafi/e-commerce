@@ -22,7 +22,7 @@ class Variant extends BaseEntity
     private $id;
 
     /**
-     * @var int
+     * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="variants")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
@@ -119,6 +119,9 @@ class Variant extends BaseEntity
         return $this->price;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
