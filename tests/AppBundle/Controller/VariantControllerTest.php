@@ -61,7 +61,6 @@ class VariantControllerTest extends ApiTest
 
     /**
      * @test
-     * @group a
      */
     public function delete_a_variant_from_a_product_should_work_fine()
     {
@@ -88,7 +87,6 @@ class VariantControllerTest extends ApiTest
     }
     /**
      * @test
-     * @group a
      */
     public function delete_a_non_exists_variant_from_a_product_should_throw_exception()
     {
@@ -105,7 +103,6 @@ class VariantControllerTest extends ApiTest
 
     /**
      * @test
-     * @group b
      */
     public function delete_variant_from_another_product_should_throw_exception()
     {
