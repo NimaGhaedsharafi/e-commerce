@@ -134,7 +134,6 @@ class VariantControllerTest extends ApiTest
 
     /**
      * @test
-     * @group a
      */
     public function edit_a_variant_from_a_product_should_work_fine()
     {
