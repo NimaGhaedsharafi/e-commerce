@@ -183,7 +183,6 @@ class VariantControllerTest extends ApiTest
 
     /**
      * @test
-     * @group a
      */
     public function update_variant_from_another_product_should_throw_exception()
     {
@@ -206,7 +205,6 @@ class VariantControllerTest extends ApiTest
         $url = vsprintf($url, [$product->getId(), $variant['id']]);
         $newPrice = 9999;
         $newColor = 1;
-
 
         $this->resetClient();
         $this->client->request('POST', $url, ['price' => $newPrice, 'color' => $newColor]);
