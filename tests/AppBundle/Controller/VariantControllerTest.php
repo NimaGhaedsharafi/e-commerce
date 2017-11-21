@@ -45,10 +45,8 @@ class VariantControllerTest extends ApiTest
 
         $this->client->request('POST', $url, $data);
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-
         $this->assertCount(1, $this->doctrine->getRepository(Variant::class)->findBy($data));
 
-        dump($this->getDecodedResponse());
         $this->seeJsonStructure([
             'variants' => [
                 '*' => [
