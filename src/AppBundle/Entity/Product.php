@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,12 +52,21 @@ class Product extends BaseEntity
     private $updatedAt;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", fetch="EAGER")
+     */
+    private $variants;
+
+
+    /**
      * Product constructor.
      */
     public function __construct()
     {
         $this->setCreatedAt(Carbon::now());
         $this->setUpdatedAt(Carbon::now());
+
+        $this->variants = new ArrayCollection();
     }
 
     /**
@@ -165,14 +175,32 @@ class Product extends BaseEntity
         return $this->updatedAt;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getVariants()
+    {
+        return $this->variants;
+    }
+
+    /**
+     * @param ArrayCollection $variants
+     */
+    public function setVariants($variants)
+    {
+        $this->variants = $variants;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
             'title' => $this->getTitle(),
-            'description' => $this->getDescription()
+            'description' => $this->getDescription(),
+            'variants' => $this->getVariants()->toArray()
         ];
     }
-
-
 }
 

@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Contracts\Collection;
 
-abstract class BaseEntity extends Collection
+abstract class BaseEntity extends Collection implements \JsonSerializable
 {
 
     /**
@@ -29,5 +29,13 @@ abstract class BaseEntity extends Collection
     public function toArray(): array
     {
         // TODO: Implement toArray() method.
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
