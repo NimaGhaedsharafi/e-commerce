@@ -1,25 +1,25 @@
 products:
     path: products
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Products:index
 
 create_product:
     path: products/create
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Products:create
 
 delete_product:
     path: products/delete
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Products:delete
 
 show_product:
     path: products/show/{id}
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Products:show
     requirements:
         id: '\d+'
@@ -27,7 +27,7 @@ show_product:
 update_product:
     path: products/edit/{id}
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Products:update
     requirements:
         id: '\d+'
@@ -35,7 +35,7 @@ update_product:
 add.varaint.product:
     path: products/{id}/variant/add
     defaults:
-        _format: json,
+        _format: json
         _controller: AppBundle:Variant:add
     requirements:
         id: '\d+'
