@@ -32,6 +32,19 @@ class ElasticSearch implements SearchService
     }
 
     /**
+     * @param ContainerInterface $container
+     * @return Client
+     */
+    private function createClient($container)
+    {
+        $elastic = $container->getParameter('elastic.host');
+
+        return ClientBuilder::create()
+            ->setConnectionParams(['headers' => ['content-type' => ['application/json']]])
+            ->setHosts(explode(',', $elastic))->build();
+    }
+    
+    /**
      * @param $keyword
      * @return array
      */
@@ -82,20 +95,7 @@ class ElasticSearch implements SearchService
             'id' => $id,
             'body' => $data
         ]);
-        
+
         return empty($result) == false;
-    }
-
-    /**
-     * @param ContainerInterface $container
-     * @return Client
-     */
-    private function createClient($container)
-    {
-        $elastic = $container->getParameter('elastic.host');
-
-        return ClientBuilder::create()
-            ->setConnectionParams(['headers' => ['content-type' => ['application/json']]])
-            ->setHosts(explode(',', $elastic))->build();
     }
 }
