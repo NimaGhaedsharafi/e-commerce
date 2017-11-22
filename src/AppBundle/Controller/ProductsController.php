@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Product;
 use AppBundle\Exception\NotFoundEntity;
+use AppBundle\Exception\ValidationFailed;
 use AppBundle\Services\Search\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,5 +120,36 @@ class ProductsController extends BaseController
         $searchService->index($product->getId(), $product->toArray());
 
         return $this->response($product);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function searchAction(Request $request)
+    {
+        if ($request->get('keyword') === null) {
+            throw new ValidationFailed();
+        }
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+
+        $response = $searchService->search($request->get('keyword'));
+
+        if (count($response) == 0) {
+            return $this->ack();
+        }
+
+        $collection = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $collection[] = [
+                'title' => $hit['_source']['title'],
+                'description' => $hit['_source']['description'],
+                'variants' => $hit['_source']['variants'],
+            ];
+        }
+
+        return $this->response($collection);
     }
 }

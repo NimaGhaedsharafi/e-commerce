@@ -67,3 +67,8 @@ update.varaint.product:
         pid: \d+
         vid: \d+
 
+search_product:
+    path: products/search
+    defaults:
+        _format: json
+        _controller: AppBundle:Products:search
