@@ -34,4 +34,5 @@ services:
     AppBundle\Services\Search\SearchService:
         class: AppBundle\Services\Search\ElasticSearch
         public: true
+        shared: false
 
