@@ -27,4 +27,10 @@ interface SearchService
      * @return bool
      */
     public function index($id, array $data);
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function delete($id);
 }

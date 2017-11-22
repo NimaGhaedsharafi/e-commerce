@@ -43,7 +43,7 @@ class ElasticSearch implements SearchService
             ->setConnectionParams(['headers' => ['content-type' => ['application/json']]])
             ->setHosts(explode(',', $elastic))->build();
     }
-    
+
     /**
      * @param $keyword
      * @return array
@@ -94,6 +94,21 @@ class ElasticSearch implements SearchService
             'type' => 'product',
             'id' => $id,
             'body' => $data
+        ]);
+
+        return empty($result) == false;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $result = $this->client->delete([
+            'index' => 'products',
+            'type' => 'product',
+            'id' => $id
         ]);
 
         return empty($result) == false;
