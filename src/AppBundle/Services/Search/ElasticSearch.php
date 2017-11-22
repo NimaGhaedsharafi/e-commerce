@@ -115,6 +115,7 @@ class ElasticSearch implements SearchService
             'type' => 'product',
             'id' => $id
         ]);
+        
         return empty($result) == false;
     }
 }
