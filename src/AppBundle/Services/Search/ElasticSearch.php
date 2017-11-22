@@ -74,7 +74,7 @@ class ElasticSearch implements SearchService
      * @param array $data
      * @return bool
      */
-    public function add($id, array $data): bool
+    public function index($id, array $data): bool
     {
         $result = $this->client->index([
             'index' => 'products',
@@ -82,8 +82,7 @@ class ElasticSearch implements SearchService
             'id' => $id,
             'body' => $data
         ]);
-
-        dump($result);
+        
         return empty($result) == false;
     }
 

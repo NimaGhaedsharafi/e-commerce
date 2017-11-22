@@ -26,5 +26,5 @@ interface SearchService
      * @param array $data
      * @return bool
      */
-    public function add($id, array $data);
+    public function index($id, array $data);
 }
