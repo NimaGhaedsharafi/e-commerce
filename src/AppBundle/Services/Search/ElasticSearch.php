@@ -65,7 +65,12 @@ class ElasticSearch implements SearchService
                                 ],
                                 [
                                     'match' => [
-                                        'variants' => $keyword,
+                                        'variants.price' => $keyword,
+                                    ]
+                                ],
+                                [
+                                    'match' => [
+                                        'variants.color' => $keyword,
                                     ]
                                 ],
                                 [
@@ -110,7 +115,6 @@ class ElasticSearch implements SearchService
             'type' => 'product',
             'id' => $id
         ]);
-
         return empty($result) == false;
     }
 }
