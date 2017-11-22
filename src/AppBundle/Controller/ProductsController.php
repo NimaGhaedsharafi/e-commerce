@@ -15,6 +15,10 @@ use AppBundle\Services\Search\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ProductsController
+ * @package AppBundle\Controller
+ */
 class ProductsController extends BaseController
 {
     /**

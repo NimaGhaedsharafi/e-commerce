@@ -10,6 +10,10 @@ use AppBundle\Services\Search\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class VariantController
+ * @package AppBundle\Controller
+ */
 class VariantController extends BaseController
 {
     /**
