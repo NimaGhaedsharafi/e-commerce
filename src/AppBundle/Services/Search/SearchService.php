@@ -11,7 +11,7 @@ namespace AppBundle\Services\Search;
 
 /**
  * Interface SearchService
- * @package AppBundle\Services\Search
+ * @package AppBundle\Service\Search
  */
 interface SearchService
 {
@@ -23,8 +23,8 @@ interface SearchService
 
     /**
      * @param $id
-     * @param $data
+     * @param array $data
      * @return bool
      */
-    public function add($id, $data);
+    public function add($id, array $data);
 }
