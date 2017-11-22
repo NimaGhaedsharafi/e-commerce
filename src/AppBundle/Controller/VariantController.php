@@ -6,6 +6,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\Variant;
 use AppBundle\Exception\NotFoundEntity;
 use AppBundle\Exception\ValidationFailed;
+use AppBundle\Services\Search\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,6 +33,10 @@ class VariantController extends BaseController
 
         $product->getVariants()->add($variant);
 
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->index($product->getId(), $product->toArray());
+
         return $this->response($product, Response::HTTP_CREATED);
     }
 
@@ -49,9 +54,14 @@ class VariantController extends BaseController
             throw new NotFoundEntity();
         }
 
+        $product = $variant->getProduct();
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($variant);
         $manager->flush();
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->index($product->getId(), $product->toArray());
 
         return $this->ack();
     }
@@ -80,6 +90,10 @@ class VariantController extends BaseController
         $variant->setColor($request->get('color'));
         $variant->setPrice($request->get('price'));
         $this->getDoctrine()->getManager()->flush();
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->index($variant->getProductId(), $variant->getProduct()->toArray());
 
         return $this->response($variant);
     }
