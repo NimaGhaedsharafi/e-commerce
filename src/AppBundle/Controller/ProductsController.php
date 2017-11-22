@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Product;
 use AppBundle\Exception\NotFoundEntity;
+use AppBundle\Services\Search\SearchService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,6 +46,10 @@ class ProductsController extends BaseController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($product);
         $manager->flush();
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->index($product->getId(), $product->toArray());
 
         return $this->response($product, Response::HTTP_CREATED);
     }
@@ -82,6 +87,11 @@ class ProductsController extends BaseController
         return $this->response($product);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Response
+     */
     public function updateAction($id, Request $request)
     {
         /** @var Product $product */
@@ -94,7 +104,11 @@ class ProductsController extends BaseController
         $product->setTitle($request->get('title'));
         $product->setDescription($request->get('description'));
         $this->getDoctrine()->getManager()->flush();
-        
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->index($product->getId(), $product->toArray());
+
         return $this->response($product);
     }
 }
