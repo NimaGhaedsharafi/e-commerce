@@ -65,9 +65,14 @@ class ProductsController extends BaseController
         if ($product === null) {
             throw new NotFoundEntity();
         }
+        $productId = $product->getId();
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($product);
         $manager->flush();
+
+        /** @var SearchService $searchService */
+        $searchService = $this->container->get(SearchService::class);
+        $searchService->delete($productId);
         
         return $this->ack();
     }
