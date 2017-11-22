@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d2794254163ade847061db94805c8b7",
-    "content-hash": "7d477f238330bd146d9f54eef9677cc8",
+    "content-hash": "8729bbfe6467ca566460f95bdd552fff",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -64,7 +63,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2017-09-11 07:24:36"
+            "time": "2017-09-11T07:24:36+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -132,7 +131,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-08-31 12:32:49"
+            "time": "2015-08-31T12:32:49+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -202,7 +201,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-07-22 12:49:21"
+            "time": "2017-07-22T12:49:21+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -268,7 +267,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2015-04-14T22:21:58+00:00"
         },
         {
             "name": "doctrine/common",
@@ -341,7 +340,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2016-11-30 16:50:46"
+            "time": "2016-11-30T16:50:46+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -412,7 +411,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-07-22 20:44:48"
+            "time": "2017-07-22T20:44:48+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -493,7 +492,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2017-10-04 22:58:25"
+            "time": "2017-10-04T22:58:25+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -581,7 +580,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-09-29 14:39:10"
+            "time": "2017-09-29T14:39:10+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -642,7 +641,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2017-11-01 09:13:26"
+            "time": "2017-11-01T09:13:26+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -709,7 +708,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2015-11-06T14:35:42+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -763,7 +762,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2015-06-14T21:17:01+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -817,7 +816,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "doctrine/migrations",
@@ -891,7 +890,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-12-25 22:54:00"
+            "time": "2016-12-25T22:54:00+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -967,7 +966,61 @@
                 "database",
                 "orm"
             ],
-            "time": "2017-09-18 06:50:20"
+            "time": "2017-09-18T06:50:20+00:00"
+        },
+        {
+            "name": "elasticsearch/elasticsearch",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elastic/elasticsearch-php.git",
+                "reference": "cb3b2438faac3fb4480a9af89a2a45bcb5049741"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/cb3b2438faac3fb4480a9af89a2a45bcb5049741",
+                "reference": "cb3b2438faac3fb4480a9af89a2a45bcb5049741",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/ringphp": "~1.0",
+                "php": ">=5.4",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "cpliakas/git-wrapper": "~1.0",
+                "mockery/mockery": "0.9.4",
+                "phpunit/phpunit": "~4.7",
+                "sami/sami": "~3.2",
+                "symfony/yaml": "2.4.3 as 2.4.2",
+                "twig/twig": "1.*"
+            },
+            "suggest": {
+                "ext-curl": "*",
+                "monolog/monolog": "Allows for client-level logging and tracing"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Elasticsearch\\": "src/Elasticsearch/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Zachary Tong"
+                }
+            ],
+            "description": "PHP Client for Elasticsearch",
+            "keywords": [
+                "client",
+                "elasticsearch",
+                "search"
+            ],
+            "time": "2017-08-25T13:38:16+00:00"
         },
         {
             "name": "fig/link-util",
@@ -1021,7 +1074,108 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-17 18:31:11"
+            "time": "2016-10-17T18:31:11+00:00"
+        },
+        {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "time": "2015-05-20T03:37:09+00:00"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2014-10-12T19:18:40+00:00"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1072,7 +1226,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2015-11-10 17:04:01"
+            "time": "2015-11-10T17:04:01+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1122,7 +1276,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2014-01-12 16:20:24"
+            "time": "2014-01-12T16:20:24+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1200,7 +1354,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19 01:22:40"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -1253,7 +1407,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2017-01-16 07:55:07"
+            "time": "2017-01-16T07:55:07+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -1316,7 +1470,7 @@
                 "proxy pattern",
                 "service proxies"
             ],
-            "time": "2015-08-09 04:28:19"
+            "time": "2015-08-09T04:28:19+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1364,7 +1518,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-09-27 21:40:39"
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "psr/cache",
@@ -1410,7 +1564,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-08-06 20:24:11"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/container",
@@ -1459,7 +1613,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/link",
@@ -1508,7 +1662,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-28 16:06:13"
+            "time": "2016-10-28T16:06:13+00:00"
         },
         {
             "name": "psr/log",
@@ -1555,7 +1709,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -1603,7 +1757,53 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02 13:31:39"
+            "time": "2017-01-02T13:31:39+00:00"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/62785ae604c8d69725d693eb370e1d67e94c4053",
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "time": "2017-03-25T12:08:31+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -1655,7 +1855,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2017-08-25 16:55:44"
+            "time": "2017-08-25T16:55:44+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1725,7 +1925,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-08-23 12:40:59"
+            "time": "2017-08-23T12:40:59+00:00"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -1770,7 +1970,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-08-22 22:18:16"
+            "time": "2017-08-22T22:18:16+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1824,7 +2024,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-05-01 15:54:03"
+            "time": "2017-05-01T15:54:03+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1884,7 +2084,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-09-26 03:17:02"
+            "time": "2017-09-26T03:17:02+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -1937,7 +2137,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-07-05 15:09:33"
+            "time": "2017-07-05T15:09:33+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -1995,7 +2195,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14 15:44:48"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2054,7 +2254,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14 15:44:48"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -2110,7 +2310,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14 15:44:48"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -2169,7 +2369,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14 15:44:48"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "symfony/polyfill-util",
@@ -2221,7 +2421,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2017-07-05 15:09:33"
+            "time": "2017-07-05T15:09:33+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -2280,7 +2480,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2017-07-22 07:18:13"
+            "time": "2017-07-22T07:18:13+00:00"
         },
         {
             "name": "symfony/symfony",
@@ -2433,7 +2633,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-10-05 23:40:32"
+            "time": "2017-10-05T23:40:32+00:00"
         },
         {
             "name": "twig/twig",
@@ -2498,7 +2698,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-09-27 18:06:46"
+            "time": "2017-09-27T18:06:46+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -2550,7 +2750,7 @@
                 "code",
                 "zf2"
             ],
-            "time": "2016-04-20 17:26:42"
+            "time": "2016-04-20T17:26:42+00:00"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -2604,7 +2804,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2016-02-18 20:53:00"
+            "time": "2016-02-18T20:53:00+00:00"
         }
     ],
     "packages-dev": [
@@ -2663,7 +2863,7 @@
                 "symfony 2",
                 "tests"
             ],
-            "time": "2017-10-19 11:52:38"
+            "time": "2017-10-19T11:52:38+00:00"
         },
         {
             "name": "sensio/generator-bundle",
@@ -2717,7 +2917,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2017-07-18 07:57:44"
+            "time": "2017-07-18T07:57:44+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -2779,7 +2979,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-10-02 06:54:00"
+            "time": "2017-10-02T06:54:00+00:00"
         }
     ],
     "aliases": [],
