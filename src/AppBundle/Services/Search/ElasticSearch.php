@@ -9,12 +9,27 @@
 namespace AppBundle\Services\Search;
 
 
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Class ElasticSearch
- * @package AppBundle\Services\Search
+ * @package AppBundle\Service\Search
  */
 class ElasticSearch implements SearchService
 {
+    /** @var Client */
+    private $client;
+
+    /**
+     * ElasticSearch constructor.
+     * @param Client $client
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->client = $this->createClient($container);
+    }
 
     /**
      * @param $keyword
@@ -22,16 +37,66 @@ class ElasticSearch implements SearchService
      */
     public function search($keyword): array
     {
-        // TODO: Implement search() method.
+        try {
+            return $this->client->search([
+                'index' => 'products',
+                'type' => 'product',
+                'body' => [
+                    'query' => [
+                        'bool' => [
+                            'should' => [
+                                [
+                                    'match' => [
+                                        'title' => $keyword,
+                                    ]
+                                ],
+                                [
+                                    'match' => [
+                                        'variants' => $keyword,
+                                    ]
+                                ],
+                                [
+                                    'match' => [
+                                        'description' => $keyword,
+                                    ]
+                                ],
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+        } catch (\Exception $e) {}
+        return [];
     }
 
     /**
      * @param $id
-     * @param $data
+     * @param array $data
      * @return bool
      */
-    public function add($id, $data): bool
+    public function add($id, array $data): bool
     {
-        // TODO: Implement add() method.
+        $result = $this->client->index([
+            'index' => 'products',
+            'type' => 'product',
+            'id' => $id,
+            'body' => $data
+        ]);
+
+        dump($result);
+        return empty($result) == false;
+    }
+
+    /**
+     * @param ContainerInterface $container
+     * @return Client
+     */
+    private function createClient($container)
+    {
+        $elastic = $container->getParameter('elastic.host');
+
+        return ClientBuilder::create()
+            ->setConnectionParams(['headers' => ['content-type' => ['application/json']]])
+            ->setHosts(explode(',', $elastic))->build();
     }
 }
