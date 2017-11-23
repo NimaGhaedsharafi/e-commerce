@@ -13,6 +13,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Exception\NotFoundEntity;
 use AppBundle\Exception\ValidationFailed;
 use AppBundle\Services\Search\SearchService;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -132,11 +133,27 @@ class ProductsController extends BaseController
             throw new ValidationFailed();
         }
 
-        /** @var SearchService $searchService */
-        $searchService = $this->container->get(SearchService::class);
+        /** @var \Closure $search
+         * @return array
+         */
+        $search = function ($keyword) {
+            /** @var AdapterInterface $cache */
+            $cache = $this->get('cache.app');
+            $cached = $cache->getItem($keyword);
 
-        $response = $searchService->search($request->get('keyword'));
+            if ($cached->isHit() == false) {
+                /** @var SearchService $searchService */
+                $searchService = $this->container->get(SearchService::class);
+                $response = $searchService->search($keyword);
+                $cached->set($response)->expiresAfter(120);
+                $this->get('cache.app')->save($cached);
 
+                return $response;
+            }
+            return $cached->get();
+        };
+
+        $response = $search(trim($request->get('keyword')));
         if (count($response) == 0) {
             return $this->ack();
         }
