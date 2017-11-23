@@ -41,9 +41,9 @@ class ProductsController extends BaseController
         // it needs some validation but I don't know how to do it in right way!
         // but just for now let's check their existence
 
-        // if ($request->get('title') === null || $request->get('description') === null) {
-        //     throw new ValidationFailed();
-        // }
+         if ($request->get('title') === null || $request->get('description') === null) {
+             throw new ValidationFailed();
+         }
 
         $product = new Product();
         $product->setTitle($request->get('title'));

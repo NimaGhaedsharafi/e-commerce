@@ -169,4 +169,28 @@ class ProductControllerTest extends ApiTest
         $this->client->request('POST', 'products/edit/' . 0, $data);
         $this->assertTrue($this->client->getResponse()->isNotFound());
     }
+
+    /**
+     * @test
+     */
+    public function create_product_without_proper_input_should_throw_exception()
+    {
+        $count = $this->doctrine->getRepository(Product::class)->count();
+
+        $data = [];
+        $this->client->request('POST', 'products/create', $data);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->resetClient();
+        $data = ['title' => 'random-name'];
+        $this->client->request('POST', 'products/create', $data);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->resetClient();
+        $data = ['description' => 'some-random-desc'];
+        $this->client->request('POST', 'products/create', $data);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->assertEquals($count, $this->doctrine->getRepository(Product::class)->count());
+    }
 }
